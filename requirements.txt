@@ -1,0 +1,5 @@
+requests>=2.31.0
+python-dotenv>=1.0.0
+bibtexparser>=1.4.0
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.12.2 
