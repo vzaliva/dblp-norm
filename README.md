@@ -38,13 +38,33 @@ pip install -r requirements.txt
 
 ## Usage
 
+### Normalise an Existing BibTeX File
+
 ```bash
-python src/dblp-norm/dblp-norm.py input.bib output.bib
+python dblp-norm.py input.bib output.bib
 ```
 
 Where:
 - `input.bib` is your source BibTeX file
 - `output.bib` is the destination file for normalised entries
+
+### Extract and Add BibTeX Entries from PDFs
+
+You can also extract titles and authors from PDF files, look up their citations in DBLP, and add any missing entries to your BibTeX file:
+
+```bash
+python dblp-from-pdf.py refs.bib paper1.pdf paper2.pdf ...
+```
+
+Where:
+- `refs.bib` is your BibTeX file (will be created if it does not exist)
+- `paper1.pdf`, `paper2.pdf`, ... are the PDF files to process
+
+The script will:
+- Extract the title and authors from each PDF
+- Query DBLP for a matching citation
+- Add new entries to the BibTeX file if not already present
+- Report any PDFs it could not process or find in DBLP
 
 ## License
 
