@@ -15,7 +15,7 @@ Entries are retrieved using the title, with supplementary fuzzy author checks em
 ## Prerequisites
 
 - Python 3.8 or higher
-- pip (Python package installer)
+- [uv](https://docs.astral.sh/uv/)
 
 ## Installation
 
@@ -25,15 +25,16 @@ git clone [repository-url]
 cd dblp-norm
 ```
 
-2. Create and activate a virtual environment:
+2. Install with uv:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+uv sync
 ```
 
-3. Install dependencies:
+This creates a virtual environment and installs all dependencies automatically.
+
+To install the commands globally (available outside the project directory):
 ```bash
-pip install -r requirements.txt
+uv tool install .
 ```
 
 ## Usage
@@ -41,19 +42,25 @@ pip install -r requirements.txt
 ### Normalise an Existing BibTeX File
 
 ```bash
-python dblp-norm.py input.bib output.bib
+uv run dblp-norm input.bib output.bib
 ```
 
 Where:
 - `input.bib` is your source BibTeX file
 - `output.bib` is the destination file for normalised entries
 
+If the output file is omitted, the input file is backed up to `input.bib.bak` and overwritten in place:
+
+```bash
+uv run dblp-norm input.bib
+```
+
 ### Extract and Add BibTeX Entries from PDFs
 
 You can also extract titles and authors from PDF files, look up their citations in DBLP, and add any missing entries to your BibTeX file:
 
 ```bash
-python dblp-from-pdf.py refs.bib paper1.pdf paper2.pdf ...
+uv run dblp-from-pdf refs.bib paper1.pdf paper2.pdf ...
 ```
 
 Where:

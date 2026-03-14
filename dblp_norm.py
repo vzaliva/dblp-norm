@@ -235,10 +235,19 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('input_file', help='Input BibTeX file')
-    parser.add_argument('output_file', help='Output BibTeX file')
-    
+    parser.add_argument('output_file', nargs='?', default=None,
+                        help='Output BibTeX file (default: overwrite input after creating .bak backup)')
+
     args = parser.parse_args()
-    normalize_bibtex_file(args.input_file, args.output_file)
+
+    if args.output_file is None:
+        import shutil
+        backup = args.input_file + '.bak'
+        shutil.copy2(args.input_file, backup)
+        print(f"Backed up {args.input_file} to {backup}")
+        normalize_bibtex_file(args.input_file, args.input_file)
+    else:
+        normalize_bibtex_file(args.input_file, args.output_file)
 
 if __name__ == '__main__':
     main()
