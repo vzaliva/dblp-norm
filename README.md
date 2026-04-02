@@ -55,6 +55,12 @@ If the output file is omitted, the input file is backed up to `input.bib.bak` an
 uv run dblp-norm input.bib
 ```
 
+Both commands accept a `--mirror` option to select which DBLP mirror to query. Available mirrors are `dblp.org` (default), `dblp.uni-trier.de`, and `dblp.dagstuhl.de`:
+
+```bash
+uv run dblp-norm --mirror dblp.uni-trier.de input.bib output.bib
+```
+
 ### Extract and Add BibTeX Entries from PDFs
 
 You can also extract titles and authors from PDF files, look up their citations in DBLP, and add any missing entries to your BibTeX file:
